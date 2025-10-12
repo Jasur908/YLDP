@@ -1,255 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PMP-Prep for Youth by YLDP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PMB – Project Management Basics</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html { scroll-behavior: smooth; }
-    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
-    .fade-in-delay-1 { animation-delay: 0.3s; }
-    .fade-in-delay-2 { animation-delay: 0.6s; }
-    .fade-in-delay-3 { animation-delay: 0.9s; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-
-    /* Toast styles */
-    #toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4f46e5;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.4s ease;
-      z-index: 1000;
+    :root{
+      --g1:#4f46e5;--g2:#7c3aed;--g3:#06b6d4;
     }
-    #toast.show {
-      opacity: 1;
-      transform: translateY(0);
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(120deg,var(--g1),var(--g2),var(--g3));
+      background-size:300% 300%;
+      animation:gradientMove 12s ease infinite;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
+    @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .card-bg{background:rgba(255,255,255,0.95);backdrop-filter:blur(6px)}
+    .card-plain{background:white}
+    header{background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.35));backdrop-filter:blur(6px)}
+    .sticker{position:absolute;pointer-events:none;opacity:0.95}
+    .float-1{animation:float 6s ease-in-out infinite}
+    .float-2{animation:float 7s ease-in-out infinite;animation-delay:0.4s}
+    .float-3{animation:float 5s ease-in-out infinite;animation-delay:0.8s}
+    @keyframes float{0%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(3deg)}100%{transform:translateY(0) rotate(-3deg)}}
+    .fade-in{opacity:0;transform:translateY(16px);transition:all .7s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+    #toast{position:fixed;bottom:18px;right:18px;background:#0f172a;color:white;padding:10px 14px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.45);opacity:0;transform:translateY(20px);transition:all .3s;z-index:9999}
+    #toast.show{opacity:1;transform:translateY(0)}
+    @media (max-width:768px){ .sticker{display:none} }
   </style>
 </head>
-<body class="font-sans text-gray-800">
+<body class="text-gray-900">
+
+  <div id="toast">Message</div>
+
   <!-- Header -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-600 fade-in">YLDP</h1>
-      <nav class="hidden md:flex space-x-6 fade-in fade-in-delay-1">
-        <a href="#about" class="hover:text-indigo-600">About</a>
-        <a href="#program" class="hover:text-indigo-600">Program</a>
-        <a href="#outcomes" class="hover:text-indigo-600">Outcomes</a>
-        <a href="#eligibility" class="hover:text-indigo-600">Eligibility</a>
-        <a href="#mission" class="hover:text-indigo-600">Mission</a>
+  <header class="sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white shadow">
+          <span class="text-indigo-600 font-bold">PMB</span>
+        </div>
+        <div>
+          <div class="text-white font-bold">Project Management Basics</div>
+          <div class="text-xs text-white/80">6-month online course</div>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-white/90">
+        <a href="#hero" class="hover:underline">Home</a>
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#program" class="hover:underline">Program</a>
+        <a href="#speakers" class="hover:underline">Speakers</a>
+        <a href="#journey" class="hover:underline">Transformation</a>
+        <a href="#eligibility" class="hover:underline">Eligibility</a>
+        <a href="#apply" class="bg-white text-indigo-700 px-4 py-2 rounded-lg font-semibold shadow">Apply Now</a>
       </nav>
-      <a href="#" onclick="openModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 fade-in fade-in-delay-2">Apply Now</a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center py-24 px-6">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4 fade-in">PMP-Prep for Youth by YLDP</h2>
-    <p class="text-lg md:text-xl mb-6 fade-in fade-in-delay-1">6-month leadership & project management journey for young changemakers (16-30)</p>
-    <a href="#" onclick="openModal()" class="bg-white text-indigo-700 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 fade-in fade-in-delay-2">Join the Program</a>
+  <!-- HERO -->
+  <section id="hero" class="relative overflow-hidden py-20">
+    <!-- stickers -->
+    <img class="sticker float-1" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4a1.png" style="width:68px;left:6%;top:10%;" alt="idea">
+    <img class="sticker float-2" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f680.png" style="width:80px;right:8%;top:22%;" alt="rocket">
+    <img class="sticker float-3" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f4c8.png" style="width:72px;left:22%;bottom:6%;" alt="chart">
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <!-- left: hero text -->
+        <div class="text-white">
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight fade-in">Learn to lead. Learn to deliver. <span class="text-yellow-300">Transform with PMB.</span></h1>
+          <p class="mt-6 text-lg max-w-xl fade-in">PMB is a <strong>6-month online course</strong> that helps you plan, lead and deliver real projects — even if you're just starting. Learn with mentors, practice with projects, join a community.</p>
+          <div class="mt-8 flex gap-4 fade-in">
+            <a href="#apply" class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-semibold shadow">Apply Now</a>
+            <a href="#program" class="bg-white/20 text-white px-6 py-3 rounded-lg font-semibold border border-white/30">See Program</a>
+          </div>
+        </div>
+
+        <!-- right: what's inside -->
+        <div class="relative">
+          <div class="card-bg rounded-xl p-6 shadow max-w-md ml-auto fade-in">
+            <h3 class="text-xl font-bold text-indigo-700">What's inside</h3>
+            <ul class="mt-4 space-y-3 text-gray-700">
+              <li>📚 Practical PM adapted for youth</li>
+              <li>🗣 Mentoring & community support</li>
+              <li>💼 Hands-on mini-projects & review</li>
+              <li>🌍 Networking & global perspective</li>
+            </ul>
+            <p class="mt-4 text-sm text-gray-600">Starts: rolling intake • Fee: $20/month</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="max-w-6xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold text-center mb-6 fade-in">About the Program</h3>
-    <p class="text-center max-w-3xl mx-auto text-lg fade-in fade-in-delay-1">This program helps young people develop project thinking, leadership skills, and communication abilities using PMP principles adapted for youth. It combines the best approaches from project management, leadership, goal setting, and mentoring.</p>
+  <!-- About (centered) -->
+  <section id="about" class="py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="card-bg rounded-2xl p-8 text-center fade-in">
+        <h2 class="text-2xl font-bold text-indigo-700">About PMB</h2>
+        <p class="mt-3 text-gray-700 max-w-3xl mx-auto">Project Management Basics (PMB) is a 6-month online program combining adapted PMP principles, mentor support and practical projects. We focus on turning ideas into outcomes.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Program Structure -->
-  <section id="program" class="bg-gray-50 py-16 px-6">
-    <h3 class="text-3xl font-bold text-center mb-10 fade-in">Program Structure</h3>
-    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg fade-in">
-        <h4 class="font-semibold mb-2">Time Management & Mission</h4>
-        <p>Leaders learn how to set goals and manage time effectively.</p>
+  <!-- Our Mission (centered & same pleasant color) -->
+  <section id="mission" class="py-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="card-bg rounded-2xl p-8 text-center fade-in">
+        <h3 class="text-2xl font-bold text-indigo-700">Our Mission</h3>
+        <p class="mt-3 text-gray-700 max-w-3xl mx-auto">To empower young people with the skills, mindset and confidence to lead meaningful projects and create lasting impact.</p>
       </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg fade-in fade-in-delay-1">
-        <h4 class="font-semibold mb-2">Risk & Resource Management</h4>
-        <p>Handling challenges and using resources wisely.</p>
+    </div>
+  </section>
+
+  <!-- Program Structure (full) -->
+  <section id="program" class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-white text-center mb-8 fade-in">Program Structure</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">💡 21st Century Skills</h4>
+          <p>Creativity, critical thinking, collaboration, and digital literacy.</p>
+        </div>
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">🕒 Time Management & Mission</h4>
+          <p>Set priorities, create mission-driven plans, manage time effectively.</p>
+        </div>
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">⚖ Risk & Resource Management</h4>
+          <p>Identify risks, plan resources and handle constraints.</p>
+        </div>
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">🧩 Problem Solving & Quality</h4>
+          <p>Approach problems, validate solutions, maintain standards.</p>
+        </div>
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">🤝 Empathy & Communication</h4>
+          <p>Build teams, communicate clearly, lead with empathy.</p>
+        </div>
+        <div class="p-6 rounded-xl card-plain shadow fade-in">
+          <h4 class="font-semibold mb-2">🌱 Sustainability & Resilience</h4>
+          <p>Create projects that last and adapt to change.</p>
+        </div>
       </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg fade-in fade-in-delay-2">
-        <h4 class="font-semibold mb-2">Problem Solving & Quality Assurance</h4>
-        <p>Learning to solve problems and maintain high standards.</p>
+    </div>
+  </section>
+
+  <!-- Guest Speakers (placeholder for many) -->
+  <section id="speakers" class="py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-white text-center mb-8 fade-in">Guest Speakers</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card-bg rounded-xl p-6 text-center fade-in">
+          <img src="https://via.placeholder.com/220" class="mx-auto rounded-lg mb-4" alt="speaker">
+          <h4 class="font-semibold">Speaker #1</h4>
+          <p class="text-sm text-gray-700 mt-2">Bio coming soon</p>
+        </div>
+        <div class="card-bg rounded-xl p-6 fade-in">
+          <h4 class="font-semibold">Speaker #2</h4>
+          <p class="text-sm text-gray-700 mt-2">Bio coming soon</p>
+        </div>
+        <div class="card-bg rounded-xl p-6 fade-in">
+          <h4 class="font-semibold">Speaker #3</h4>
+          <p class="text-sm text-gray-700 mt-2">Bio coming soon</p>
+        </div>
       </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg fade-in fade-in-delay-1">
-        <h4 class="font-semibold mb-2">Empathy & Communication</h4>
-        <p>Building strong connections and understanding others.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg fade-in fade-in-delay-2">
-        <h4 class="font-semibold mb-2">Sustainability & Resilience</h4>
-        <p>Leading with responsibility for long-term impact.</p>
+    </div>
+  </section>
+
+  <!-- Transformation Journey (Before & After) -->
+  <section id="journey" class="py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-white text-center mb-8 fade-in">✨ Before & After</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow fade-in">
+          <h4 class="text-xl font-bold mb-4">🚀 Where you start</h4>
+          <ul class="space-y-2 text-gray-800">
+            <li>🤔 Curious — you have ideas but not a clear plan</li>
+            <li>😟 Unsure — lacking confidence to lead</li>
+            <li>📋 No practical project experience yet</li>
+            <li>🌱 Eager — ready to grow but need guidance</li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow fade-in">
+          <h4 class="text-xl font-bold mb-4">🌟 Where you'll be</h4>
+          <ul class="space-y-2 text-gray-800">
+            <li>💡 Confident — you lead and inspire others</li>
+            <li>📈 Skilled — turn ideas into measurable results</li>
+            <li>🤝 Connected — part of a growing community</li>
+            <li>🚀 Project-ready — you deliver impact</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Outcomes -->
-  <section id="outcomes" class="max-w-6xl mx-auto px-6 py-16">
-    <h3 class="text-3xl font-bold text-center mb-10 fade-in">Program Outcomes</h3>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in">
-        <h4 class="font-semibold mb-2">Leadership Basics</h4>
-        <p>Understanding what leadership means in real life.</p>
-      </div>
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in fade-in-delay-1">
-        <h4 class="font-semibold mb-2">Communication & Teamwork</h4>
-        <p>Learning to work and speak effectively in teams.</p>
-      </div>
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in fade-in-delay-2">
-        <h4 class="font-semibold mb-2">Small Project Experience</h4>
-        <p>Practice leading small tasks with mentor support.</p>
-      </div>
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in fade-in-delay-1">
-        <h4 class="font-semibold mb-2">Problem Solving</h4>
-        <p>Identifying challenges and exploring solutions.</p>
-      </div>
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in fade-in-delay-2">
-        <h4 class="font-semibold mb-2">Networking</h4>
-        <p>Connecting with peers from different countries.</p>
-      </div>
-      <div class="bg-indigo-50 p-6 rounded-xl fade-in fade-in-delay-3">
-        <h4 class="font-semibold mb-2">Inspired by Alumni</h4>
-        <p>Learning from real success stories of alumni.</p>
+  <section id="outcomes" class="py-14">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-white text-center mb-8 fade-in">Program Outcomes</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-indigo-50 p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">🌟 Leadership Basics</h4>
+          <p>Understand leadership in practice.</p>
+        </div>
+        <div class="bg-indigo-50 p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">🤝 Communication & Teamwork</h4>
+          <p>Stronger collaboration and presentation skills.</p>
+        </div>
+        <div class="bg-indigo-50 p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">📊 Small Project Experience</h4>
+          <p>Practice running mini-projects with mentor feedback.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Eligibility -->
-  <section id="eligibility" class="bg-gray-50 py-16 px-6">
-    <h3 class="text-3xl font-bold text-center mb-6 fade-in">Eligibility</h3>
-    <ul class="max-w-3xl mx-auto list-disc list-inside text-lg space-y-2 fade-in fade-in-delay-1">
-      <li>Age: 16 to 30</li>
-      <li>No prior leadership training required</li>
-      <li>Motivated, curious, and open to learning</li>
-      <li>Comfortable with basic English</li>
-      <li>Passionate about making a difference</li>
-      <li>Subscription fee: $20/month</li>
-    </ul>
-  </section>
-
-  <!-- Mission -->
-  <section id="mission" class="max-w-4xl mx-auto px-6 py-16 text-center">
-    <h3 class="text-3xl font-bold mb-6 fade-in">Our Mission</h3>
-    <p class="text-lg fade-in fade-in-delay-1">Not just a course, but a community of young leaders who want to think clearly, act systematically, and live with dignity. After graduation, you become part of the YLDP Alumni community, where growth continues.</p>
-  </section>
-
-  <!-- Apply Section -->
-  <section id="apply" class="bg-indigo-600 text-white py-16 px-6 text-center">
-    <h3 class="text-3xl font-bold mb-4 fade-in">Ready to Join?</h3>
-    <p class="mb-6 fade-in fade-in-delay-1">Take your first step towards leadership. Apply now and start your journey!</p>
-    <a href="#" onclick="openModal()" class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-semibold shadow hover:bg-gray-100 fade-in fade-in-delay-2">Apply Now</a>
-    <div class="mt-6 fade-in fade-in-delay-3">
-      <p class="text-lg">📅 Application Deadline: <strong>1 October 2025</strong></p>
-      <p id="countdown" class="text-xl font-bold mt-2"></p>
+  <section id="eligibility" class="py-16">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-white mb-8 fade-in">Eligibility</h3>
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="card-bg p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">🎓 Age</h4>
+          <p>16+ years old</p>
+        </div>
+        <div class="card-bg p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">💻 How we work</h4>
+          <p>4 online sessions per month • 1 offline graduation • 1.5 hours per session</p>
+        </div>
+        <div class="card-bg p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">🌍 Requirements</h4>
+          <p>Stable internet connection and basic device</p>
+        </div>
+        <div class="card-bg p-6 rounded-xl fade-in">
+          <h4 class="font-semibold mb-2">🧠 Mindset</h4>
+          <p>Curious, motivated, and ready to learn</p>
+        </div>
+      </div>
+      <p class="text-white/90 mt-6 italic">“Everyone starts somewhere — and PMB is where you grow.”</p>
     </div>
   </section>
 
-  <!-- Modal Registration Form -->
-  <div id="applyModal" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md relative">
-      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-red-500">✖</button>
-      <h3 class="text-2xl font-bold mb-4 text-center">Registration</h3>
-      <form id="applyForm" class="space-y-4">
-        <input type="text" name="lastname" placeholder="Фамилия" required class="w-full border rounded px-4 py-2">
-        <input type="text" name="firstname" placeholder="Имя" required class="w-full border rounded px-4 py-2">
-        <input type="number" name="age" min="16" placeholder="Возраст (16+)" required class="w-full border rounded px-4 py-2">
-        <input type="tel" name="phone" id="phone" placeholder="+998xxxxxxxxx" required class="w-full border rounded px-4 py-2">
-        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">Отправить</button>
-      </form>
+<!-- Apply (single centered card, everything inside) -->
+<section id="apply" class="py-20">
+  <div class="max-w-5xl mx-auto px-6 fade-in">
+    <div class="card-bg rounded-2xl p-8 text-center">
+      <h3 class="text-3xl font-bold text-indigo-700 mb-2">Ready to Join PMB?</h3>
+      <p class="text-gray-700 mb-6">Take your first step towards leadership and impact.</p>
+
+      <!-- Apply button -->
+      <a href="https://forms.gle/5QyE4fJR5Ldi7nKB6" target="_blank"
+         class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold shadow inline-block mb-6 transition">
+        Apply Now
+      </a>
+
+      <!-- Countdown inside same card -->
+      <div id="countdownTimer" class="text-2xl font-bold text-indigo-700 mb-2"></div>
+      <p class="text-sm text-gray-700 mb-4">Time left to apply • Deadline: October 20, 2025</p>
+
+      <!-- Social links inside same card -->
+      <div class="mt-2 mb-4">
+        <a href="#" class="text-indigo-600 hover:underline mx-2">Instagram</a>
+        <span class="text-gray-400">•</span>
+        <a href="#" class="text-indigo-600 hover:underline mx-2">LinkedIn</a>
+        <span class="text-gray-400">•</span>
+        <a href="https://t.me/gafurovich_26" class="text-indigo-600 hover:underline mx-2">Telegram</a>
+      </div>
+
+      <!-- © inside the same card -->
+      <p class="text-gray-500 text-sm mt-4">© 2025 PMB • Project Management Basics</p>
     </div>
   </div>
+</section>
 
-  <!-- Toast Notification -->
-  <div id="toast">Заявка успешно отправлена ✅</div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-8 px-6 text-center">
-    <p>© 2025 YLDP | All rights reserved.</p>
-    <p class="mt-2">Follow us on <a href="#" class="text-indigo-400 hover:underline">Instagram</a>, <a href="#" class="text-indigo-400 hover:underline">LinkedIn</a>, <a href="#" class="text-indigo-400 hover:underline">Telegram</a></p>
-  </footer>
 
   <script>
-    function openModal() { document.getElementById('applyModal').classList.remove('hidden'); }
-    function closeModal() { document.getElementById('applyModal').classList.add('hidden'); }
+    // Intersection-based fade-in
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:0.12});
+    document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
 
-    // Phone input auto +998
-    const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('focus', () => {
-      if (!phoneInput.value.startsWith('+998')) {
-        phoneInput.value = '+998';
-      }
-    });
-
-    // Toast function
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.innerText = message;
-      toast.classList.add('show');
-      setTimeout(() => { toast.classList.remove('show'); }, 3000);
+    // Countdown inside apply card
+    const deadline = new Date('October 20, 2025 23:59:59').getTime();
+    const timerEl = document.getElementById('countdownTimer');
+    function updateTimer(){
+      const now = Date.now();
+      const diff = deadline - now;
+      if(diff <= 0){ timerEl.textContent = '0d 0h 0m 0s'; return;}
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const s = Math.floor((diff % (1000*60)) / 1000);
+      timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
     }
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-    // Form submission
-    document.getElementById('applyForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const age = parseInt(this.age.value);
-      if (age < 16) {
-        showToast("Минимальный возраст 16 лет ❌");
-        return;
-      }
-
-      const data = {
-        lastname: this.lastname.value,
-        firstname: this.firstname.value,
-        age: this.age.value,
-        phone: this.phone.value
-      };
-
-      const BOT_TOKEN = "8060840746:AAHUFrFQ5eh65mRR2QU0MO4CAV1ZPIzi8XE";
-      const CHAT_ID = "6390109469";
-      const text = `📝 Новая заявка:%0AФамилия: ${data.lastname}%0AИмя: ${data.firstname}%0AВозраст: ${data.age}%0AТелефон: ${data.phone}`;
-
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`, {
-        method: "GET"
-      })
-      .then(response => {
-        if (response.ok) {
-          showToast("Заявка успешно отправлена ✅");
-          closeModal();
-          document.getElementById('applyForm').reset();
-        } else {
-          showToast("Ошибка при отправке ❌");
-        }
-      })
-      .catch(err => showToast("Ошибка: " + err));
+    // Small parallax stickers on mouse move for extra WOW
+    document.addEventListener('mousemove', e => {
+      document.querySelectorAll('.sticker').forEach((el, i) => {
+        const speed = (i+1) * 0.02;
+        const x = (window.innerWidth/2 - e.clientX) * speed;
+        const y = (window.innerHeight/2 - e.clientY) * speed;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      });
     });
 
-    // Countdown to deadline (1 October 2025)
-    const deadline = new Date("October 1, 2025 23:59:59").getTime();
-    const countdownElement = document.getElementById("countdown");
-
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = deadline - now;
-
-      if (distance < 0) {
-        countdownElement.innerHTML = "⏳ Deadline has passed";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
-    }, 1000);
+    // helper toast (kept in file in case needed)
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=> t.classList.remove('show'), 3200);
+    }
   </script>
 </body>
 </html>
