@@ -254,73 +254,80 @@
     </div>
   </section>
 
-  <!-- Guest Speakers -->
-<section id="speakers" class="py-20 bg-gray-50 text-center">
-  <h2 class="text-3xl font-bold text-indigo-600 mb-12">Guest Speakers</h2>
-  <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-10 px-8">
-    
-    <!-- Feruza Rashidova -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-      <img src="img/rasidova.jpg" alt="Feruza Rashidova" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-lg font-semibold text-gray-800">Dr. Feruza Rashidova</h3>
-        <p class="text-indigo-600 font-medium text-sm">Project Management & Leadership Expert</p>
-        <p class="mt-2 text-gray-600 text-sm">
-          Experienced mentor and trainer inspiring young leaders through innovative education and project-based learning.
-        </p>
-      </div>
-    </div>
+ <!-- Guest Speakers (Slider Version) -->
+<section id="speakers" class="py-20 bg-gray-50 text-center relative overflow-hidden">
+  <h2 class="text-3xl font-bold text-indigo-600 mb-10">Guest Speakers</h2>
 
-    <!-- Sherzodbek Norboev -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-      <img src="images/sherzodbek.jpg" alt="Sherzodbek Norboev" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-lg font-semibold text-gray-800">Sherzodbek Norboev</h3>
-        <p class="text-indigo-600 font-medium text-sm">HR & L&D Consultant</p>
-        <p class="mt-2 text-gray-600 text-sm">
-          Certified HR professional with international experience in leadership and organizational development.
-        </p>
+  <!-- Slider container -->
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div id="speakerSlider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4">
+      
+      <!-- Feruza Rashidova -->
+      <div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl shadow-lg overflow-hidden snap-center flex-shrink-0">
+        <img src="img/rasidova.jpg" alt="Feruza Rashidova" class="w-full h-56 object-cover">
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-800">Dr. Feruza Rashidova</h3>
+          <p class="text-indigo-600 font-medium text-sm">Project Management & Leadership Expert</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Experienced mentor and trainer inspiring young leaders through innovative education and project-based learning.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- Nuriddin Samatov -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-      <img src="img/nuriddin.jpg" alt="Nuriddin Samatov" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-lg font-semibold text-gray-800">Nuriddin Samatov</h3>
-        <p class="text-indigo-600 font-medium text-sm">Environmental & Innovation Specialist</p>
-        <p class="mt-2 text-gray-600 text-sm">
-          Researcher in green innovation and ICT sustainability with a focus on climate-smart development.
-        </p>
+      <!-- Sherzodbek Norboev -->
+      <div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl shadow-lg overflow-hidden snap-center flex-shrink-0">
+        <img src="images/sherzodbek.jpg" alt="Sherzodbek Norboev" class="w-full h-56 object-cover">
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-800">Sherzodbek Norboev</h3>
+          <p class="text-indigo-600 font-medium text-sm">HR & L&D Consultant</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Certified HR professional with international experience in leadership and organizational development.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- Jasur Babadjanov -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-      <img src="img/jasur.jpg" alt="Jasur Babadjanov" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-lg font-semibold text-gray-800">Jasur Babadjanov</h3>
-        <p class="text-indigo-600 font-medium text-sm">Lecturer & Vice-Dean at Central Asian University</p>
-        <p class="mt-2 text-gray-600 text-sm">
-          Vice-Dean of Dental School on Clinical Affairs and International Cooperation, dedicated to healthcare education and youth leadership.
-        </p>
+      <!-- Nuriddin Samatov -->
+      <div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl shadow-lg overflow-hidden snap-center flex-shrink-0">
+        <img src="img/nuriddin.jpg" alt="Nuriddin Samatov" class="w-full h-56 object-cover">
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-800">Nuriddin Samatov</h3>
+          <p class="text-indigo-600 font-medium text-sm">Environmental & Innovation Specialist</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Researcher in green innovation and ICT sustainability with a focus on climate-smart development.
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- Aziz Nishanov -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-      <img src="images/aziz.jpg" alt="Aziz Nishanov" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-lg font-semibold text-gray-800">Aziz Nishanov</h3>
-        <p class="text-indigo-600 font-medium text-sm">Operations & Events Manager, Webster University</p>
-        <p class="mt-2 text-gray-600 text-sm">
-          Skilled manager with a strong record in organizing impactful events and fostering youth engagement through leadership and innovation.
-        </p>
+      <!-- Jasur Babadjanov -->
+      <div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl shadow-lg overflow-hidden snap-center flex-shrink-0">
+        <img src="img/jasur.jpg" alt="Jasur Babadjanov" class="w-full h-56 object-cover">
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-800">Jasur Babadjanov</h3>
+          <p class="text-indigo-600 font-medium text-sm">Lecturer & Vice-Dean, Central Asian University</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Vice-Dean of Dental School on Clinical Affairs and International Cooperation, dedicated to healthcare education and youth leadership.
+          </p>
+        </div>
       </div>
-    </div>
 
+      <!-- Aziz Nishanov -->
+      <div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl shadow-lg overflow-hidden snap-center flex-shrink-0">
+        <img src="img/aziz.jpg" alt="Aziz Nishanov" class="w-full h-56 object-cover">
+        <div class="p-5">
+          <h3 class="text-lg font-semibold text-gray-800">Aziz Nishanov</h3>
+          <p class="text-indigo-600 font-medium text-sm">Operations & Events Manager, Webster University</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Skilled manager with a strong record in organizing impactful events and fostering youth engagement through leadership and innovation.
+          </p>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <p class="text-gray-500 text-sm mt-6">Swipe left or right to explore</p>
 </section>
+
 
 
 
