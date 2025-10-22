@@ -124,149 +124,152 @@
     }
 
     /* ---------------------------
-       Guest Speakers styles
-       Desktop: show 5 cards in one row
-       Mobile: horizontal swipe + IG-style floating arrows
+       SPEAKERS: mobile slider + desktop row
+       - Default: mobile slider (horizontal scroll)
+       - Desktop (>=1024px): grid of 5 in a row
        --------------------------- */
 
-    /* container that holds speaker cards */
+    /* Speaker container - default: mobile slider */
     #speakerSlider {
       display: flex;
-      gap: 18px;
-      align-items: stretch;
-      /* mobile behavior: horizontal scroll and snap */
+      gap: 16px;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      padding: 12px 6px;
+      align-items: flex-start;
     }
 
-    /* each speaker card */
+    /* each speaker card (mobile look) */
     .speaker-card {
+      flex: 0 0 86%;
+      scroll-snap-align: center;
       background: white;
       border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.06);
       overflow: hidden;
-      flex: 0 0 85%;
-      scroll-snap-align: center;
+      min-width: 86%;
     }
 
+    /* image on top, info below (mobile-friendly) */
     .speaker-card img {
       width: 100%;
-      height: 220px;
+      height: 180px; /* smaller on mobile so info visible */
       object-fit: cover;
       display: block;
     }
 
-    .speaker-card .meta {
-      padding: 18px;
-      color: #374151;
+    .speaker-meta {
+      padding: 14px;
+      text-align: left;
     }
 
-    .speaker-card h3 {
+    .speaker-meta h3 {
       margin: 0;
       font-size: 1.05rem;
       color: #111827;
       font-weight: 700;
     }
 
-    .speaker-card .role {
+    .speaker-meta .role {
       color: var(--purple);
-      margin-top: 6px;
       font-weight: 600;
       font-size: 0.85rem;
+      margin-top: 6px;
     }
 
-    .speaker-card p.desc {
-      margin-top: 10px;
-      font-size: 0.95rem;
+    .speaker-meta p {
+      margin-top: 8px;
       color: #4b5563;
-      line-height: 1.4;
+      font-size: 0.95rem;
+      line-height: 1.35;
     }
 
-    /* Instagram-style floating arrow buttons (mobile) */
+    /* IG-style floating arrow buttons (mobile) */
     .slider-btn {
-      display: flex;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 9999px;
-      align-items: center;
-      justify-content: center;
-      background: rgba(79, 70, 229, 0.9);
-      /* purple */
-      color: white;
-      border: none;
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.18);
-      cursor: pointer;
-      z-index: 40;
-      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-      opacity: 0.95;
-      backdrop-filter: blur(4px);
+      display: none; /* hidden by default, shown on small screens below */
     }
 
-    .slider-btn:hover {
-      transform: translateY(-50%) scale(1.06);
-      box-shadow: 0 14px 34px rgba(79, 70, 229, 0.22);
+    @media (max-width: 767px) {
+      .slider-btn {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        align-items: center;
+        justify-content: center;
+        background: rgba(79, 70, 229, 0.95);
+        color: white;
+        border: none;
+        box-shadow: 0 10px 30px rgba(79, 70, 229, 0.18);
+        cursor: pointer;
+        z-index: 50;
+        transition: transform .15s ease, box-shadow .15s ease;
+        opacity: 0.95;
+      }
+
+      .slider-btn.left {
+        left: 12px;
+      }
+
+      .slider-btn.right {
+        right: 12px;
+      }
     }
 
-    .slider-btn.left {
-      left: 12px;
-    }
-
-    .slider-btn.right {
-      right: 12px;
-    }
-
-    /* Desktop: show five cards in one row */
+    /* Desktop: show 5 in one row (grid) */
     @media (min-width: 1024px) {
       #speakerSlider {
-        display: flex;
-        overflow: visible;
-        gap: 20px;
-        /* ensure single row, no wrapping */
-        flex-wrap: nowrap;
-        justify-content: space-between;
-      }
-
-      .speaker-card {
-        flex: 0 0 calc((100% / 5) - 16px);
-        min-width: calc((100% / 5) - 16px);
-        scroll-snap-align: none;
-      }
-
-      /* hide arrows on desktop */
-      .slider-btn {
-        display: none !important;
-      }
-    }
-
-    /* Tablet: allow showing 3 per row (optional) */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      #speakerSlider {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 20px;
         overflow: visible;
+        align-items: start;
       }
 
       .speaker-card {
         flex: 0 0 auto;
-        min-width: unset;
+        min-width: auto;
+        scroll-snap-align: none;
       }
 
+      .speaker-card img {
+        height: 220px; /* slightly taller on desktop */
+      }
+
+      /* hide mobile arrows on desktop */
       .slider-btn {
-        display: none !important;
+        display:none !important;
       }
     }
 
-    /* For very small screens keep the arrow visible */
-    @media (max-width: 767px) {
-      .slider-btn {
-        display: flex;
+    /* Tablet: show 3 columns */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      #speakerSlider {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        overflow: visible;
       }
+
+      .speaker-card {
+        min-width: auto;
+        flex: 0 0 auto;
+      }
+
+      .speaker-card img {
+        height: 200px;
+      }
+
+      .slider-btn { display:none !important; }
+    }
+
+    /* small visual niceties */
+    .speaker-section-wrap {
+      position: relative; /* so arrows can be absolute inside */
     }
   </style>
 </head>
@@ -616,7 +619,7 @@
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
     // Countdown inside apply card
-    const deadline = new Date('November 10, 2025 23:59:59').getTime();
+    const deadline = new Date('October 30, 2025 23:59:59').getTime();
     const timerEl = document.getElementById('countdownTimer');
     function updateTimer() {
       const now = Date.now();
@@ -631,16 +634,23 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // Mobile slider buttons (for phones only)
+    // Mobile slider buttons (for phones only) - robust compute
     function slideSpeakers(dir) {
       const slider = document.getElementById('speakerSlider');
       if (!slider) return;
-      // compute distance equal to one visible card on small screens
+      // find visible width for a card: on mobile cards have width close to slider.clientWidth * 0.86
       const card = slider.querySelector('.speaker-card');
-      const gap = 18;
-      const width = card ? (card.offsetWidth + gap) : 340;
+      const computedGap = 16; // consistent with CSS gap
+      let width = card ? (card.offsetWidth + computedGap) : Math.floor(window.innerWidth * 0.86);
+      // scroll by approximate card width
       slider.scrollBy({ left: dir * width, behavior: 'smooth' });
     }
+
+    // Ensure keyboard arrows scroll the mobile slider
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') slideSpeakers(1);
+      if (e.key === 'ArrowLeft') slideSpeakers(-1);
+    });
 
     // Small parallax stickers on mouse move for extra WOW
     document.addEventListener('mousemove', e => {
@@ -661,5 +671,6 @@
     }
   </script>
 </body>
+
 
 </html>
