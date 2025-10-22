@@ -386,85 +386,79 @@
     </div>
   </section>
 
-  <!-- Guest Speakers -->
-  <section id="speakers" class="py-20 bg-gray-50 text-center">
-    <h2 class="text-3xl font-bold text-indigo-600 mb-12">Guest Speakers</h2>
-    <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-10 px-8">
+ <!-- Guest Speakers -->
+<section id="speakers" class="py-20 bg-gray-50 text-center relative">
+  <h2 class="text-3xl font-bold text-indigo-600 mb-12">Guest Speakers</h2>
 
-      <!-- Feruza Rashidova -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="img/rasidova.jpg" alt="Feruza Rashidova" class="w-full h-56 object-cover">
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-800">Dr. Feruza Rashidova</h3>
-          <p class="text-indigo-600 font-medium text-sm">Project Management & Leadership Expert</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Experienced mentor and trainer inspiring young leaders through innovative education and project-based
-            learning.
-          </p>
-        </div>
+  <!-- Slider container -->
+  <div id="speakerSlider" class="flex gap-6 overflow-x-auto md:overflow-visible px-6 scroll-smooth">
+    <!-- Feruza Rashidova -->
+    <div class="speaker-card flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+      <img src="img/rasidova.jpg" alt="Feruza Rashidova" class="w-full h-56 object-cover">
+      <div class="speaker-meta text-left p-5">
+        <h3 class="text-lg font-semibold text-gray-800">Dr. Feruza Rashidova</h3>
+        <p class="text-indigo-600 font-medium text-sm">Project Management & Leadership Expert</p>
+        <p class="mt-2 text-gray-600 text-sm">
+          Experienced mentor and trainer inspiring young leaders through innovative education and project-based learning.
+        </p>
       </div>
-
-      <!-- Sherzodbek Norboev -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="img/norboyev.JPG" alt="Sherzodbek Norboev" class="w-full h-56 object-cover">
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-800">Sherzodbek Norboev</h3>
-          <p class="text-indigo-600 font-medium text-sm">HR & L&D Consultant</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Certified HR professional with international experience in leadership and organizational development.
-          </p>
-        </div>
-      </div>
-
-      <!-- Nuriddin Samatov -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="img/nuriddin.jpg" alt="Nuriddin Samatov" class="w-full h-56 object-cover">
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-800">Nuriddin Samatov</h3>
-          <p class="text-indigo-600 font-medium text-sm">Environmental & Innovation Specialist</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Researcher in green innovation and ICT sustainability with a focus on climate-smart development.
-          </p>
-        </div>
-      </div>
-
-      <!-- Jasur Babadjanov -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="img/jasur.jpg" alt="Jasur Babadjanov" class="w-full h-56 object-cover">
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-800">Jasur Babadjanov</h3>
-          <p class="text-indigo-600 font-medium text-sm">Lecturer & Vice-Dean at Central Asian University</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Vice-Dean of Dental School on Clinical Affairs and International Cooperation, dedicated to healthcare
-            education and youth leadership.
-          </p>
-        </div>
-      </div>
-
-      <!-- Aziz Nishanov -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-        <img src="img/aziz.jpg" alt="Aziz Nishanov" class="w-full h-56 object-cover">
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-800">Aziz Nishanov</h3>
-          <p class="text-indigo-600 font-medium text-sm">Operations & Events Manager, Webster University</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Skilled manager with a strong record in organizing impactful events and fostering youth engagement through
-            leadership and innovation.
-          </p>
-        </div>
-      </div>
-
     </div>
-  </section>
 
+    <!-- Sherzodbek Norboev -->
+    <div class="speaker-card flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+      <img src="img/norboyev.JPG" alt="Sherzodbek Norboev" class="w-full h-56 object-cover">
+      <div class="speaker-meta text-left p-5">
+        <h3 class="text-lg font-semibold text-gray-800">Sherzodbek Norboev</h3>
+        <p class="text-indigo-600 font-medium text-sm">HR & L&D Consultant</p>
+        <p class="mt-2 text-gray-600 text-sm">
+          Certified HR professional with international experience in leadership and organizational development.
+        </p>
+      </div>
+    </div>
 
-  <!-- IG-style floating arrow buttons (mobile) -->
-  <button class="slider-btn left" aria-label="Previous" onclick="slideSpeakers(-1)">&#10094;</button>
-  <button class="slider-btn right" aria-label="Next" onclick="slideSpeakers(1)">&#10095;</button>
+    <!-- Nuriddin Samatov -->
+    <div class="speaker-card flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+      <img src="img/nuriddin.jpg" alt="Nuriddin Samatov" class="w-full h-56 object-cover">
+      <div class="speaker-meta text-left p-5">
+        <h3 class="text-lg font-semibold text-gray-800">Nuriddin Samatov</h3>
+        <p class="text-indigo-600 font-medium text-sm">Environmental & Innovation Specialist</p>
+        <p class="mt-2 text-gray-600 text-sm">
+          Researcher in green innovation and ICT sustainability with a focus on climate-smart development.
+        </p>
+      </div>
+    </div>
+
+    <!-- Jasur Babadjanov -->
+    <div class="speaker-card flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+      <img src="img/jasur.jpg" alt="Jasur Babadjanov" class="w-full h-56 object-cover">
+      <div class="speaker-meta text-left p-5">
+        <h3 class="text-lg font-semibold text-gray-800">Jasur Babadjanov</h3>
+        <p class="text-indigo-600 font-medium text-sm">Lecturer & Vice-Dean at Central Asian University</p>
+        <p class="mt-2 text-gray-600 text-sm">
+          Vice-Dean of Dental School on Clinical Affairs and International Cooperation, dedicated to healthcare education and youth leadership.
+        </p>
+      </div>
+    </div>
+
+    <!-- Aziz Nishanov -->
+    <div class="speaker-card flex-shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+      <img src="img/aziz.jpg" alt="Aziz Nishanov" class="w-full h-56 object-cover">
+      <div class="speaker-meta text-left p-5">
+        <h3 class="text-lg font-semibold text-gray-800">Aziz Nishanov</h3>
+        <p class="text-indigo-600 font-medium text-sm">Operations & Events Manager, Webster University</p>
+        <p class="mt-2 text-gray-600 text-sm">
+          Skilled manager with a strong record in organizing impactful events and fostering youth engagement through leadership and innovation.
+        </p>
+      </div>
+    </div>
   </div>
 
-  <p class="text-gray-500 text-sm mt-6">Swipe left or right to explore (on mobile)</p>
-  </section>
+  <!-- Arrows only for mobile -->
+  <button class="slider-btn left" aria-label="Previous" onclick="slideSpeakers(-1)">&#10094;</button>
+  <button class="slider-btn right" aria-label="Next" onclick="slideSpeakers(1)">&#10095;</button>
+
+  <p class="text-gray-500 text-sm mt-6 md:hidden">Swipe left or right to explore</p>
+</section>
 
   <!-- Before & After -->
   <section id="journey" class="py-16 text-center">
@@ -636,15 +630,14 @@
 
     // Mobile slider buttons (for phones only) - robust compute
     function slideSpeakers(dir) {
-      const slider = document.getElementById('speakerSlider');
-      if (!slider) return;
-      // find visible width for a card: on mobile cards have width close to slider.clientWidth * 0.86
-      const card = slider.querySelector('.speaker-card');
-      const computedGap = 16; // consistent with CSS gap
-      let width = card ? (card.offsetWidth + computedGap) : Math.floor(window.innerWidth * 0.86);
-      // scroll by approximate card width
-      slider.scrollBy({ left: dir * width, behavior: 'smooth' });
-    }
+  const slider = document.getElementById('speakerSlider');
+  if (!slider) return;
+  const card = slider.querySelector('.speaker-card');
+  const gap = 16;
+  const width = card ? (card.offsetWidth + gap) : window.innerWidth * 0.9;
+  slider.scrollBy({ left: dir * width, behavior: 'smooth' });
+}
+
 
     // Ensure keyboard arrows scroll the mobile slider
     document.addEventListener('keydown', (e) => {
