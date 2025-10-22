@@ -606,14 +606,14 @@
   </section>
 
   <script>
-    // Intersection-based fade-in
+    // Fade-in animation
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-    // Countdown inside apply card
-    const deadline = new Date('October 30, 2025 23:59:59').getTime();
+    // Countdown timer
+    const deadline = new Date('November 10, 2025 23:59:59').getTime();
     const timerEl = document.getElementById('countdownTimer');
     function updateTimer() {
       const now = Date.now();
@@ -628,42 +628,20 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    // Mobile slider buttons (for phones only) - robust compute
+    // Mobile slider navigation
     function slideSpeakers(dir) {
-  const slider = document.getElementById('speakerSlider');
-  if (!slider) return;
-  const card = slider.querySelector('.speaker-card');
-  const gap = 16;
-  const width = card ? (card.offsetWidth + gap) : window.innerWidth * 0.9;
-  slider.scrollBy({ left: dir * width, behavior: 'smooth' });
-}
-
-
-    // Ensure keyboard arrows scroll the mobile slider
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') slideSpeakers(1);
-      if (e.key === 'ArrowLeft') slideSpeakers(-1);
-    });
-
-    // Small parallax stickers on mouse move for extra WOW
-    document.addEventListener('mousemove', e => {
-      document.querySelectorAll('.sticker').forEach((el, i) => {
-        const speed = (i + 1) * 0.02;
-        const x = (window.innerWidth / 2 - e.clientX) * speed;
-        const y = (window.innerHeight / 2 - e.clientY) * speed;
-        el.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    });
-
-    // helper toast (kept in file in case needed)
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3200);
+      const slider = document.getElementById('speakerSlider');
+      if (!slider) return;
+      const card = slider.querySelector('.speaker-card');
+      const gap = 16;
+      const width = card ? (card.offsetWidth + gap) : window.innerWidth * 0.9;
+      slider.scrollBy({ left: dir * width, behavior: 'smooth' });
     }
+
+    // Auto slide every 4s (only on mobile)
+    setInterval(() => {
+      if (window.innerWidth < 768) slideSpeakers(1);
+    }, 4000);
   </script>
 </body>
-
-
 </html>
