@@ -327,14 +327,6 @@
       </div>
     </div>
 
-    <!-- Индикаторы -->
-    <div class="flex justify-center mt-5 space-x-2 md:hidden">
-      <span class="dot w-3 h-3 rounded-full bg-indigo-300 transition-all duration-500"></span>
-      <span class="dot w-3 h-3 rounded-full bg-indigo-300 transition-all duration-500"></span>
-      <span class="dot w-3 h-3 rounded-full bg-indigo-300 transition-all duration-500"></span>
-      <span class="dot w-3 h-3 rounded-full bg-indigo-300 transition-all duration-500"></span>
-      <span class="dot w-3 h-3 rounded-full bg-indigo-300 transition-all duration-500"></span>
-    </div>
 
     <p class="text-gray-500 text-center mt-10 italic fade-in">
       More inspiring guest speakers will be joining soon!
@@ -541,84 +533,125 @@
 }`;
     document.head.appendChild(style);
 
-    <!-- === ВСТАВЬ ЭТО ВМЕСТО старого блока // --- Speaker slider (mobile only) --- === -->
-    // --- Speaker slider (mobile only, visible dots) ---
-    const cards = document.querySelectorAll('#speakerSlider .speaker-card');
-    const slider = document.getElementById('speakerSlider');
-    let current = 0;
+    // --- JS слайдер для мобильных (авто 10 сек + свайп) ---
+    const speakerCards = document.querySelectorAll('#speakers .speaker-card');
+    let currentSpeaker = 0;
     let autoSlide;
-    let startX = 0;
-    let isDragging = false;
 
-    // создаем точки-индикаторы (только если они еще не созданы)
-    let dotsContainer = document.getElementById('sliderDots');
-    if (!dotsContainer) {
-      dotsContainer = document.createElement('div');
-      dotsContainer.id = 'sliderDots';
-      dotsContainer.className = 'flex justify-center mt-4 space-x-2 md:hidden';
-      cards.forEach(() => {
-        const dot = document.createElement('span');
-        dot.className =
-          'dot w-3 h-3 rounded-full bg-gray-400 transition-all duration-300';
-        dotsContainer.appendChild(dot);
-      });
-      slider.parentElement.appendChild(dotsContainer);
-    }
-
-    const dots = dotsContainer.querySelectorAll('.dot');
-
-    function showSpeaker(i) {
-      current = (i + cards.length) % cards.length;
-      cards.forEach((card, idx) => {
+    function showSpeaker(index) {
+      speakerCards.forEach((card, i) => {
         if (window.innerWidth < 768) {
-          card.style.display = idx === current ? 'block' : 'none';
+          card.style.display = i === index ? 'block' : 'none';
         } else {
           card.style.display = 'block';
         }
       });
-
-      dots.forEach((dot, j) => {
-        if (j === current) {
-          dot.classList.add('bg-indigo-600');
-          dot.classList.remove('bg-gray-400');
-        } else {
-          dot.classList.add('bg-gray-400');
-          dot.classList.remove('bg-indigo-600');
-        }
-      });
     }
 
-    function slideSpeakers(dir) {
-      showSpeaker(current + dir);
+    function nextSpeaker() {
+      currentSpeaker = (currentSpeaker + 1) % speakerCards.length;
+      showSpeaker(currentSpeaker);
+    }
+
+    function prevSpeaker() {
+      currentSpeaker = (currentSpeaker - 1 + speakerCards.length) % speakerCards.length;
+      showSpeaker(currentSpeaker);
     }
 
     function startAutoSlide() {
       clearInterval(autoSlide);
       if (window.innerWidth < 768) {
-        autoSlide = setInterval(() => slideSpeakers(1), 5000); // каждые 5 секунд
+        autoSlide = setInterval(nextSpeaker, 5000); // 10 секунд
       }
     }
 
-    // свайп (для телефонов)
-    slider.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-      isDragging = true;
-    });
-    slider.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      const diff = e.touches[0].clientX - startX;
-      if (Math.abs(diff) > 50) {
-        clearInterval(autoSlide);
-        slideSpeakers(diff < 0 ? 1 : -1);
-        isDragging = false;
-        startAutoSlide();
-      }
-    });
-    slider.addEventListener('touchend', () => (isDragging = false));
+    // --- Swipe (для ручного листания) ---
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-    showSpeaker(0);
-    startAutoSlide();
-    window.addEventListener('resize', startAutoSlide);
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+
+    function handleTouchEnd(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }
+
+    function handleGesture() {
+      if (window.innerWidth >= 768) return;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSpeaker();
+        else prevSpeaker();
+      }
+    }
+
+    // --- Инициализация ---
+    document.addEventListener('DOMContentLoaded', () => {
+      showSpeaker(0);
+      startAutoSlide();
+
+      window.addEventListener('resize', startAutoSlide);
+
+      const speakersSection = document.getElementById('speakers');
+      speakersSection.addEventListener('touchstart', handleTouchStart, false);
+      speakersSection.addEventListener('touchend', handleTouchEnd, false);
+    });
+
+    // --- Точки под слайдом для мобильной версии ---
+    const dotsContainer = document.createElement("div");
+    dotsContainer.id = "speakerDots";
+    dotsContainer.style.display = "flex";
+    dotsContainer.style.justifyContent = "center";
+    dotsContainer.style.marginTop = "12px";
+    dotsContainer.style.gap = "8px";
+    dotsContainer.style.transition = "opacity 0.3s";
+
+    speakerCards[0].parentElement.parentElement.appendChild(dotsContainer);
+
+    speakerCards.forEach((_, i) => {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      dot.style.width = "10px";
+      dot.style.height = "10px";
+      dot.style.borderRadius = "50%";
+      dot.style.background = i === 0 ? "#4f46e5" : "#cbd5e1"; // первая активна
+      dot.style.transition = "background 0.3s, transform 0.3s";
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateDots() {
+      const dots = dotsContainer.querySelectorAll(".dot");
+      dots.forEach((dot, i) => {
+        if (i === currentSpeaker) {
+          dot.style.background = "#4f46e5";
+          dot.style.transform = "scale(1.2)";
+        } else {
+          dot.style.background = "#cbd5e1";
+          dot.style.transform = "scale(1)";
+        }
+      });
+    }
+
+    // обновляем при смене спикера
+    function showSpeaker(index) {
+      speakerCards.forEach((card, i) => {
+        if (window.innerWidth < 768) {
+          card.style.display = i === index ? "block" : "none";
+        } else {
+          card.style.display = "block";
+        }
+      });
+      updateDots();
+    }
+
+    // Показываем/скрываем точки в зависимости от размера экрана
+    function toggleDotsVisibility() {
+      dotsContainer.style.display = window.innerWidth < 768 ? "flex" : "none";
+    }
+    window.addEventListener("resize", toggleDotsVisibility);
+    toggleDotsVisibility();
 
   </script>
 
