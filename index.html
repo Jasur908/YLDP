@@ -328,6 +328,9 @@
     </div>
 
 
+    <!-- Точки под слайдом (мобильная версия) -->
+    <div id="speakerDots" class="flex justify-center mt-6 space-x-2 md:hidden"></div>
+
     <p class="text-gray-500 text-center mt-10 italic fade-in">
       More inspiring guest speakers will be joining soon!
     </p>
@@ -599,34 +602,34 @@
       speakersSection.addEventListener('touchend', handleTouchEnd, false);
     });
 
-    // --- Точки под слайдом для мобильной версии ---
-    const dotsContainer = document.createElement("div");
-    dotsContainer.id = "speakerDots";
-    dotsContainer.style.display = "flex";
-    dotsContainer.style.justifyContent = "center";
-    dotsContainer.style.marginTop = "12px";
-    dotsContainer.style.gap = "8px";
-    dotsContainer.style.transition = "opacity 0.3s";
+    // --- Точки под слайдом ---
+    const dotsContainer = document.getElementById("speakerDots");
 
-    speakerCards[0].parentElement.parentElement.appendChild(dotsContainer);
-
+    // создаем точки
     speakerCards.forEach((_, i) => {
       const dot = document.createElement("div");
       dot.classList.add("dot");
       dot.style.width = "10px";
       dot.style.height = "10px";
       dot.style.borderRadius = "50%";
-      dot.style.background = i === 0 ? "#4f46e5" : "#cbd5e1"; // первая активна
+      dot.style.background = i === 0 ? "#4f46e5" : "#cbd5e1";
       dot.style.transition = "background 0.3s, transform 0.3s";
+      dot.style.cursor = "pointer";
+      dot.addEventListener("click", () => {
+        currentSpeaker = i;
+        showSpeaker(currentSpeaker);
+        startAutoSlide(); // перезапускаем автопрокрутку
+      });
       dotsContainer.appendChild(dot);
     });
 
+    // обновление активной точки
     function updateDots() {
       const dots = dotsContainer.querySelectorAll(".dot");
       dots.forEach((dot, i) => {
         if (i === currentSpeaker) {
           dot.style.background = "#4f46e5";
-          dot.style.transform = "scale(1.2)";
+          dot.style.transform = "scale(1.3)";
         } else {
           dot.style.background = "#cbd5e1";
           dot.style.transform = "scale(1)";
@@ -634,7 +637,7 @@
       });
     }
 
-    // обновляем при смене спикера
+    // немного меняем showSpeaker, чтобы он вызывал updateDots()
     function showSpeaker(index) {
       speakerCards.forEach((card, i) => {
         if (window.innerWidth < 768) {
@@ -646,12 +649,6 @@
       updateDots();
     }
 
-    // Показываем/скрываем точки в зависимости от размера экрана
-    function toggleDotsVisibility() {
-      dotsContainer.style.display = window.innerWidth < 768 ? "flex" : "none";
-    }
-    window.addEventListener("resize", toggleDotsVisibility);
-    toggleDotsVisibility();
 
   </script>
 
